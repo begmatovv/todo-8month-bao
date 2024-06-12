@@ -9,10 +9,9 @@ const Home = () => {
   const { data } = useCollection("tasks", ["uid", "==", user.uid]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newTask = { title, description, uid: user.uid, id: Math.random() };
+    const newTask = { title, description, uid: user.uid};
     addDoc(collection(db, "tasks"), newTask)
       .then(() => {
         toast.success("new task added successfully");
@@ -22,7 +21,6 @@ const Home = () => {
       });
   };
   const handleDelete = (taskId) => {
-    console.log(taskId);
     const taskRef = doc(db, "tasks", taskId);
     deleteDoc(taskRef)
       .then(() => {
@@ -62,6 +60,7 @@ const Home = () => {
       </form>
       <ul className="bg-base-200 w-[800px] mx-auto p-4 flex flex-col gap-4 min-h-80">
         {data &&
+        
           data.map((task) => {
             return (
               <li
